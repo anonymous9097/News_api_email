@@ -1,20 +1,19 @@
 import requests
 from send_email import send_email
+import os
+from dotenv import load_dotenv
 
 topic = "tesla"
-api = "8588afec044e47d59e67401c98431ecd"
-url = ("https://newsapi.org/v2/everything?"
-       f"q={topic}&"
-       "from=2024-01-18&"
-       "sortBy=publishedAt&"
-       "apiKey=8588afec044e47d59e67401c98431ecd&"
-       "language=en")
+api = os.getenv('NEWS_API')
+url = ("https://newsapi.org/v2/everything?domains=wsj.com"
+       f"&apiKey={api}")
 
 # Make Requests
 request = requests.get(url)
 
 # Get a dictionary with data
 content = request.json()
+print(content)
 
 # Access the article titles and description
 body = "Subject: Daily News!\n\n"
